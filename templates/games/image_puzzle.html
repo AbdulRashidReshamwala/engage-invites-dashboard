@@ -1,0 +1,104 @@
+{% extends "base.html" %} {% block body %}
+
+<div class="jumbotron">
+  <h2>Image Puzzle</h2>
+  <h5>
+   
+  </h5>
+  <form action="/game/image_puzzle" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Game Name</label>
+      <input
+        autofocus
+        type="text"
+        name="gameName"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >No spaces allowed</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Background Image</label>
+      <input
+        type="text"
+        name="bgImg"
+        class="form-control"
+        id="exampleInputPassword1"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with no spaces</small
+      >
+    <div class="form-group">
+      <label for="exampleInputPassword1">Title Image</label>
+      <input
+        type="text"
+        name="titleImg"
+        class="form-control"
+        id="exampleInputPassword1"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with no spaces</small
+      >
+    <div class="form-group">
+      <label for="exampleInputPassword1">Game Image</label>
+      <input
+        type="text"
+        name="img"
+        class="form-control"
+        id="exampleInputPassword1"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with no spaces</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Game Image Border</label>
+      <input
+        type="text"
+        name="borderImg"
+        class="form-control"
+        id="borderImg"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with no space</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Number of sections</label>
+      <input
+        type="number"
+        name="sectionCount"
+        class="form-control"
+        id="exampleInputPassword1"
+        min="2"
+        max="6"
+      />
+      <small id="emailHelp" class="form-text text-muted">ideally 3-5</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Reward Type</label>
+      <select class="form-control" name="rewardType" id="rewardType">
+        <option value="confetti">Confetti</option>
+        <option value="emoji">Emoji</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Emoji List</label>
+      <input
+        type="text"
+        name="emojiList"
+        class="form -control"
+        id="exampleInputPassword1"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >Comma seperated list of emojis (use only when above option is 'emoji')</small
+      >
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "base.html" %} {% block body %}
+<h2>Manage Session</h2>
+<br />
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Session Name</th>
+      <th scope="col">Link</th>
+      <th scope="col">Rehydrate</th>
+      <th scope="col">Status</th>
+      <th scope="col">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for session in sessionInfo %}
+    <tr>
+      <td>{{session['id']}}</td>
+      <td>
+        <a href="/{{session['id']}}" class="btn btn-primary"
+          ><svg
+            width="1.5rem"
+            height="1.5rem"
+            viewBox="0 0 16 16"
+            class="bi bi-arrow-up-right"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M14 2.5a.5.5 0 0 0-.5-.5h-6a.5.5 0 0 0 0 1h4.793L2.146 13.146a.5.5 0 0 0 .708.708L13 3.707V8.5a.5.5 0 0 0 1 0v-6z"
+            />
+          </svg>
+        </a>
+      </td>
+      <td>
+        <a href="/{{session['id']}}" class="btn btn-primary">
+          <svg
+            width="1.5rem"
+            height="1.5rem"
+            viewBox="0 0 16 16"
+            class="bi bi-arrow-repeat"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"
+            />
+          </svg>
+        </a>
+      </td>
+      {% if session['active'] %}
+      <td>
+        <a href="/{{session['id']}}" class="btn btn-success"
+          ><svg
+            width="1.5rem"
+            height="1.5rem"
+            viewBox="0 0 16 16"
+            class="bi bi-play"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10.804 8L5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"
+            />
+          </svg>
+        </a>
+      </td>
+      {% else %}
+      <td>
+        <a href="/{{session['id']}}" class="btn btn-warning">
+          <svg
+            width="1.5rem"
+            height="1.5rem"
+            viewBox="0 0 16 16"
+            class="bi bi-pause"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"
+            />
+          </svg>
+        </a>
+      </td>
+      {% endif %}
+      <td>
+        <a href="" class="btn btn-dark"
+          ><svg
+            width="1.5rem"
+            height="1.5rem"
+            viewBox="0 0 16 16"
+            class="bi bi-arrow-down-square-fill"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"
+            />
+          </svg>
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock%}

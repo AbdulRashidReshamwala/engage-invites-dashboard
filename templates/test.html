@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+  </head>
+  <body>
+    <button id="test">test</button>
+    <button id="test2">test</button>
+    <script>
+      const isAuthenticated = async () => {
+        let r = await fetch(`http://127.0.0.1:9000/user/login`, {
+          credentials: "include",
+          method: "POST",
+          body: JSON.stringify({
+            email: "test@gmail.com",
+            password: "Test@123",
+          }),
+          headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+          },
+        });
+        console.log(await r.json());
+      };
+      const isAuthenticated2 = async () => {
+        let r = await fetch(`http://127.0.0.1:9000/user`, {
+          credentials: "include",
+          method: "GET",
+
+          headers: {
+            Accept: "application/json",
+            "Content-type": "application/json",
+          },
+        });
+        console.log(await r.json());
+      };
+      document
+        .querySelector("#test")
+        .addEventListener("click", isAuthenticated);
+      document
+        .querySelector("#test2")
+        .addEventListener("click", isAuthenticated2);
+    </script>
+  </body>
+</html>

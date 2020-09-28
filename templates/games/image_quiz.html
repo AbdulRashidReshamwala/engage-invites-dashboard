@@ -1,0 +1,195 @@
+{% extends "base.html" %} {% block body %}
+
+<div class="jumbotron">
+  <h2>Image Quiz</h2>
+
+  <h5>
+    
+  </h5>
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Game Name</label>
+      <input
+        autofocus
+        type="text"
+        name="gameName"
+        class="form-control"
+        id="gameName"
+        aria-describedby="emailHelp"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >No spaces allowed</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Background Image</label>
+      <input
+        type="text"
+        id="bgImg"
+        class="form-control"
+        id="exampleInputPassword1"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension with no spaces</small
+      >
+    <div class="form-group">
+      <label for="exampleInputPassword1">Title Image</label>
+      <input
+        type="text"
+        id="titleImg"
+        class="form-control"
+        id="exampleInputPassword1"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension with no spaces</small
+      >
+    <div class="form-group">
+      <label for="exampleInputPassword1">Game Image</label>
+      <input
+        type="text"
+        id="img"
+        class="form-control"
+        id="exampleInputPassword1"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension with no spaces</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Game Image Border</label>
+      <input
+        type="text"
+        name="borderImg"
+        class="form-control"
+        id="borderImg"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with no space</small
+      >
+    </div>
+    <br />
+    <h3>Add levels</h3>
+    <h6 id="levelsAdded">levels added : 0</h6>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Question </label>
+      <input type="text" name="img" class="form-control" id="question" />
+      <small id="emailHelp" class="form-text text-muted"
+        >Question to be displayed</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Options</label>
+      <input type="text" name="img" class="form-control" id="options" />
+      <small id="emailHelp" class="form-text text-muted"
+        >comma ' , ' seperated values
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Correct answer option</label>
+      <input type="text" class="form-control" id="correctOption" />
+      <small id="emailHelp" class="form-text text-muted"
+        >one of a , b , c</small
+      >
+    </div>
+    <a id="addLevel" class="btn btn-success btn-block">Add level</a>
+    <br /><br />
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Reward Type</label>
+      <select class="form-control" name="rewardType" id="rewardType">
+        <option value="confetti">Confetti</option>
+        <option value="emoji">Emoji</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Emoji List</label>
+      <input
+        type="text"
+        name="emojiList"
+        class="form-control"
+        id="emojiList"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >Comma seperated list of emojis (use only when above option is 'emoji')</small
+      >
+    </div>
+    <a id="submitBtn" class="btn btn-primary btn-block">Submit</a>
+  </form>
+
+  <script>
+    let levels = [];
+
+    $("#addLevel").click(() => {
+      const options = $("#options").val().trim().split(",");
+      if (options.length !== 3) {
+        alert("please set only three options");
+        return;
+      }
+      const question = $("#question").val().trim();
+      if (question === "") {
+        alert("question feild cannot be empty");
+        return;
+      }
+      const correnctOption = $("#correctOption").val().trim().toLowerCase();
+      if (
+        !(
+          correnctOption === "a" ||
+          correnctOption === "b" ||
+          correnctOption == "c"
+        )
+      ) {
+        alert("correct option must be one of a,b,c");
+        return;
+      }
+      const ans = {
+        a: options[0],
+        b: options[1],
+        c: options[2],
+      };
+      levels.push({
+        id: levels.length,
+        question: question,
+        answers: ans,
+
+        correctOption: correnctOption,
+        correctAnswer: ans[correnctOption],
+        wasAnswerd: false,
+      });
+      $("#options").val("");
+      $("#question").val("");
+      $("#correctOption").val("");
+      $("#levelsAdded").text("levels addes : " + levels.length.toString());
+    });
+
+    $("#submitBtn").click(() => {
+      if (levels.length !== 9) {
+        alert("must put 9 levels");
+        return;
+      }
+      fetch("/game/image_quiz", {
+        method: "post",
+        body: JSON.stringify({
+          levels: levels,
+          gameName: $("#gameName").val().trim(),
+          img: $("#img").val().trim(),
+          bgImg: $("#bgImg").val().trim(),
+          titleImg: $("#titleImg").val().trim(),
+          borderImg: $("#borderImg").val().trim(),
+          rewardType: $("#rewardType").val().trim(),
+          emojiList: $("#emojiList").val().trim(),
+        }),
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (j) {
+          console.log(j);
+          if (j.status === "success") window.location.href = "/manage_sessions";
+          else alert("Operation uncessfull");
+        })
+        .catch(function (err) {
+          alert("Operation uncessfull");
+        });
+    });
+  </script>
+</div>
+{% endblock %}

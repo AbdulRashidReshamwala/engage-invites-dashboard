@@ -1,0 +1,365 @@
+{% extends "base.html" %} {% block body %}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
+/>
+
+<div class="jumbotron">
+  <h2>Create Session</h2>
+  <br />
+  <form action="/game/image_puzzle" method="post">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Session Name</label>
+      <input
+        autofocus
+        type="text"
+        class="form-control"
+        id="sessionName"
+        aria-describedby="emailHelp"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >No spaces allowed</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Button font </label>
+      <input
+        autofocus
+        type="text"
+        class="form-control"
+        id="btnFont"
+        aria-describedby="emailHelp"
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >case sensitive eg : 'Roboto' choose font from
+        <a href="https://fonts.google.com/" target="blank">here</a></small
+      >
+    </div>
+    <div class="form-row">
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Button color </label>
+          <input
+            autofocus
+            type="color"
+            class="form-control"
+            id="btnColor"
+            aria-describedby="emailHelp"
+            value="#ffffff"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Button Highlight</label>
+          <input
+            autofocus
+            type="color"
+            class="form-control"
+            id="btnHilight"
+            value="#000000"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">Login background Image</label>
+      <input type="text" class="form-control" id="loginBackground" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Login Creative Image</label>
+      <input type="text" class="form-control" id="loginCreative" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Logo Image</label>
+      <input type="text" class="form-control" id="logoImg" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Greeting media</label>
+      <select class="form-control" id="greetingMediaType">
+        <option value="yt">youtube video</option>
+        <option value="img">image</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Login background Image</label>
+      <input type="text" class="form-control" id="greetingBackground" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Greeting Creative Image</label>
+      <input type="text" class="form-control" id="greetingCreative" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Greeting media URl</label>
+      <input type="text" class="form-control" id="greetingMediaUrl" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension or youtube url</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Greeting secondary image</label>
+      <input type="text" class="form-control" id="greetingSecondaryImg" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name without spaces</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Loading Spinner</label>
+      <input type="text" class="form-control" id="loadingSpinner" />
+      <small id="emailHelp" class="form-text text-muted"
+        >GIF File name without spaces</small
+      >
+    </div>
+
+    <br /><br />
+    <h2>Add Games</h2>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Game Type</label>
+          <select class="form-control" id="gameType">
+            <option></option>
+            {% for g in games%}
+            <option>{{g}}</option>
+            {% endfor%}
+          </select>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Game Name</label>
+          <select class="form-control" id="gameName">
+            <option></option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <p>
+      Games Added :
+      <span style="font-weight: bold; color: blue" id="gamesAdded"> </span>
+    </p>
+    <a class="btn btn-success btn-block" id="addGame">Add Game </a>
+    <br />
+    <a class="btn btn-block btn-danger" id="removeGame">Reset Games </a>
+    <br /><br />
+    <div class="form-group">
+      <label for="exampleInputPassword1">End background Image</label>
+      <input type="text" class="form-control" id="endBackground" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">End Greeting media</label>
+      <select class="form-control" id="endMediaType">
+        <option value="yt">youtube video</option>
+        <option value="img">image</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">End Greeting media URl</label>
+      <input type="text" class="form-control" id="endMediaUrl" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension or youtube url</small
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="exampleInputPassword1">End Creative Image</label>
+      <input type="text" class="form-control" id="endCreative" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">End Download Creative </label>
+      <input type="text" class="form-control" id="endDownloadCreative" />
+      <small id="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+
+    <a class="btn btn-primary btn-block" id="submitBtn">Submit</a>
+  </form>
+
+  <script>
+    let gamesAdded = [];
+    $("#gameType").on("change", function () {
+      const q = this.value;
+      $("#gameName").empty();
+      if (q === "") {
+        return;
+      }
+      fetch("/list/" + q)
+        .then((res) => res.json())
+        .then((j) => {
+          let games = j.games;
+          games.forEach((element) => {
+            let ele = $("<option></option>")
+              .attr("value", element)
+              .text(element);
+            $("#gameName").append(ele);
+          });
+        });
+    });
+
+    $("#addGame").click(() => {
+      let gameToAdd = $("#gameName").val();
+      if (gameToAdd === "") {
+        alert("game not selected");
+        return;
+      }
+      if (gamesAdded.indexOf(gameToAdd) !== -1) {
+        alert("game alredy added");
+        return;
+      }
+      gamesAdded.push(gameToAdd);
+      $("#gamesAdded").text(gamesAdded.join(" , "));
+    });
+    $("#removeGame").click(() => {
+      if (!confirm("Reset all added Games")) {
+        return;
+      }
+      gamesAdded = [];
+      $("#gamesAdded").text(gamesAdded.join(" , "));
+    });
+
+    $("#submitBtn").click(() => {
+      const sessionName = $("#sessionName").val().trim();
+      const loginBackground = $("#loginBackground").val().trim();
+      const loginCreative = $("#loginCreative").val().trim();
+      const logoImg = $("#logoImg").val().trim();
+      const greetingMediaType = $("#greetingMediaType").val().trim();
+      const greetingMediaUrl = $("#greetingMediaUrl").val().trim();
+      const greetingBackground = $("#greetingBackground").val().trim();
+      const greetingSecondaryImg = $("#greetingSecondaryImg").val().trim();
+      const greetingCreative = $("#greetingCreative").val().trim();
+      const endMediaType = $("#endMediaType").val().trim();
+      const endMediaUrl = $("#endMediaUrl").val().trim();
+      const endBackground = $("#endBackground").val().trim();
+      const endCreative = $("#endCreative").val().trim();
+      const endDownloadCreative = $("#endDownloadCreative").val().trim();
+      const btnFont = $("#btnFont").val().trim();
+      const btnColor = $("#btnColor").val().trim();
+      const btnHilight = $("#btnHilight").val().trim();
+      const loadingSpinner = $("#loadingSpinner").val().trim();
+
+      if (gamesAdded.length < 1) {
+        alert("No games added");
+        return;
+      }
+      console.log(greetingMediaType);
+      if (sessionName.indexOf(" ") >= 0 || sessionName === "") {
+        alert(`session name can't have spaces`);
+        return;
+      }
+      if (loginBackground.indexOf(" ") >= 0 || loginBackground === "") {
+        alert(`login Background can't have spaces`);
+        return;
+      }
+      if (loginCreative.indexOf(" ") >= 0 || loginCreative === "") {
+        alert(`login Creative can't have spaces`);
+        return;
+      }
+      if (
+        greetingSecondaryImg.indexOf(" ") >= 0 ||
+        greetingSecondaryImg === ""
+      ) {
+        alert(`Greeting Secondary can't have spaces`);
+        return;
+      }
+      if (logoImg.indexOf(" ") >= 0 || logoImg === "") {
+        alert(`Logo img can't have spaces`);
+        return;
+      }
+      if (!(greetingMediaType === "yt" || greetingMediaType === "img")) {
+        alert(`unknown value for greeting media type`);
+        return;
+      }
+      if (greetingMediaUrl.indexOf(" ") >= 0 || greetingMediaUrl === "") {
+        alert(`Greeting Media can't have spaces`);
+        return;
+      }
+      if (greetingBackground.indexOf(" ") >= 0 || greetingBackground === "") {
+        alert(`Greeting Background can't have spaces`);
+        return;
+      }
+      if (loadingSpinner.indexOf(" ") >= 0 || loadingSpinner === "") {
+        alert(`Loading Spinner can't have spaces`);
+        return;
+      }
+      if (!(endMediaType === "yt" || endMediaType === "img")) {
+        alert(`unknown value for end media type`);
+        return;
+      }
+      if (endMediaUrl.indexOf(" ") >= 0 || endMediaUrl === "") {
+        alert(`end Media can't have spaces`);
+        return;
+      }
+      if (endBackground.indexOf(" ") >= 0 || endBackground === "") {
+        alert(`end Background can't have spaces`);
+        return;
+      }
+
+      const sessionDetails = {
+        sessionName,
+        loginBackground,
+        loginCreative,
+        logoImg,
+        greetingMediaUrl,
+        greetingMediaType,
+        greetingBackground,
+        greetingSecondaryImg,
+        endMediaUrl,
+        endMediaType,
+        endBackground,
+        endCreative,
+        gamesAdded,
+        endDownloadCreative,
+        greetingCreative,
+        btnHilight,
+        btnColor,
+        btnFont,
+      };
+
+      console.log(sessionDetails);
+      fetch("/create_session", {
+        method: "post",
+        body: JSON.stringify(sessionDetails),
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (j) {
+          console.log(j);
+          if (j.status === "success") window.location.href = "/manage_sessions";
+          else alert("Operation uncessfull");
+        })
+        .catch(function (err) {
+          alert("Operation uncessfull");
+        });
+    });
+  </script>
+  <style>
+    body {
+      background-image: url("https://images.unsplash.com/photo-1510079204922-a11f920f2c53");
+    }
+  </style>
+</div>
+{% endblock%}
