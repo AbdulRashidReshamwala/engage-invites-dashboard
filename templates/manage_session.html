@@ -16,7 +16,9 @@
     <tr>
       <td>{{session['id']}}</td>
       <td>
-        <a href="/{{session['id']}}" class="btn btn-primary"
+        <a
+          href="https://enagage-invites.web.app/{{session['id']}}"
+          class="btn btn-primary"
           ><svg
             width="1.5rem"
             height="1.5rem"
@@ -33,7 +35,7 @@
         </a>
       </td>
       <td>
-        <a href="/{{session['id']}}" class="btn btn-primary">
+        <a href="/hydrate/{{session['id']}}" class="btn btn-primary">
           <svg
             width="1.5rem"
             height="1.5rem"
@@ -54,7 +56,7 @@
       </td>
       {% if session['active'] %}
       <td>
-        <a href="/{{session['id']}}" class="btn btn-success"
+        <a href="/status/{{session['id']}}" class="btn btn-success"
           ><svg
             width="1.5rem"
             height="1.5rem"
@@ -72,7 +74,7 @@
       </td>
       {% else %}
       <td>
-        <a href="/{{session['id']}}" class="btn btn-warning">
+        <a href="/status/{{session['id']}}" class="btn btn-warning">
           <svg
             width="1.5rem"
             height="1.5rem"
@@ -90,7 +92,7 @@
       </td>
       {% endif %}
       <td>
-        <a href="" class="btn btn-dark"
+        <a href="/download/{{session['id']}}" class="btn btn-dark"
           ><svg
             width="1.5rem"
             height="1.5rem"

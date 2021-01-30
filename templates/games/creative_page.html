@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block body %}
+
+<div class="jumbotron">
+  <h2>Creative Page</h2>
+  <form
+    action="/game/creative_page"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <div class="form-group">
+      <label for="exampleInputPassword1">Name</label>
+      <input type="text" class="form-control" name="name" />
+      <small name="emailHelp" class="form-text text-muted">id for game</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Primary media</label>
+      <select class="form-control" name="primaryMediaType">
+        <option value="yt">youtube video</option>
+        <option value="img">image</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Background Image</label>
+      <input type="text" class="form-control" name="bgImg" />
+      <small name="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Title Image</label>
+      <input type="text" class="form-control" name="titleImg" />
+      <small name="emailHelp" class="form-text text-muted"
+        >image File name with extension</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Primary media URl</label>
+      <input type="text" class="form-control" name="primaryMediaUrl" />
+      <small name="emailHelp" class="form-text text-muted"
+        >image File name with extension or youtube url</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Secondary image</label>
+      <input type="text" class="form-control" name="secondaryImg" />
+      <small name="emailHelp" class="form-text text-muted"
+        >image File name without spaces</small
+      >
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </form>
+</div>
+{% endblock %}

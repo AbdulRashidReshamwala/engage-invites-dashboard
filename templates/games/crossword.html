@@ -1,0 +1,251 @@
+{% extends "base.html" %} {% block body %}
+
+<div class="jumbotron">
+  <h2>Crossword</h2>
+
+  <h5>
+
+  </h5>
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Game Name</label>
+      <input autofocus type="text" name="gameName" class="form-control" id="gameName" aria-describedby="emailHelp" />
+      <small id="emailHelp" class="form-text text-muted">No spaces allowed</small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Background Image</label>
+      <input type="text" id="bgImg" class="form-control" id="exampleInputPassword1" />
+      <small id="emailHelp" class="form-text text-muted">image File name with extension with no spaces</small>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Title Image</label>
+        <input type="text" id="titleImg" class="form-control" id="exampleInputPassword1" />
+        <small id="emailHelp" class="form-text text-muted">image File name with extension with no spaces</small>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputPassword1">Hint Image</label>
+        <input type="text" id="hintImg" class="form-control" id="exampleInputPassword1" />
+        <small id="emailHelp" class="form-text text-muted">image File name with extension with no spaces</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Text font </label>
+        <input autofocus type="text" class="form-control" id="txtFont" aria-describedby="emailHelp" />
+        <small id="emailHelp" class="form-text text-muted">case sensitive eg : 'Roboto' choose font from
+          <a href="https://fonts.google.com/" target="blank">here</a></small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Text color </label>
+        <input autofocus type="color" class="form-control" id="txtColor" aria-describedby="emailHelp" value="#ffffff" />
+      </div>
+      <div class="" id="grid">
+        <table>
+          <tr>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">11</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">12</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">13</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">14</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">15</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">16</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">17</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">18</td>
+
+          </tr>
+          <tr>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">21</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">22</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">23</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">24</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">25</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">26</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">27</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">28</td>
+
+          </tr>
+          <tr>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">31</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">32</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">33</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">34</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">35</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">36</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">37</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">38</td>
+
+          </tr>
+          <tr>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">41</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">42</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">43</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">44</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">45</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">46</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">47</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">48</td>
+
+          </tr>
+          <tr>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">51</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">52</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">53</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">54</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">55</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">56</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">57</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">58</td>
+
+          </tr>
+          <tr>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">61</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">62</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">63</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">64</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">65</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">66</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">67</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">68</td>
+
+          </tr>
+          <tr>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">71</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">72</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">73</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">74</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">75</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">76</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">77</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">78</td>
+
+          </tr>
+          <tr>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">81</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">82</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">83</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">84</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">85</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">86</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">87</td>
+            <td class="cell" style="padding: 1rem; background-color: white;border:5px solid black; ">88</td>
+
+          </tr>
+        </table>
+      </div>
+      <br />
+      <h3>Add levels</h3>
+      <h6 id="levelsAdded">Words added : 0</h6>
+      <h6 id="rcl"></h6>
+
+      <div class="form-group">
+        <label for="exampleInputPassword1">Clue </label>
+        <input type="text" name="img" class="form-control" id="clue" />
+        <small id="emailHelp" class="form-text text-muted">Clue to be displayed</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Direction</label>
+        <select class="form-control" name="rewardType" id="answerDirection">
+          <option value="across">Across</option>
+          <option value="down">Down</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Correct answer</label>
+        <input type="text" class="form-control" id="answer" />
+      </div>
+      <a id="addLevel" class="btn btn-success btn-block">Add level</a>
+      <br /><br />
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Reward Type</label>
+        <select class="form-control" name="rewardType" id="rewardType">
+          <option value="confetti">Confetti</option>
+          <option value="emoji">Emoji</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Emoji List</label>
+        <input type="text" name="emojiList" class="form-control" id="emojiList" />
+        <small id="emailHelp" class="form-text text-muted">Comma seperated list of emojis (use only when above option
+          is
+          'emoji')</small>
+      </div>
+      <a id="submitBtn" class="btn btn-primary btn-block">Submit</a>
+  </form>
+<style>
+  .cell:hover{
+    background-color: coral !important;
+    size: 110% !important;
+  }
+</style>
+  <script>
+    let levels = [];
+    let r
+    let c
+    let i = 0
+    let cells = document.querySelectorAll('.cell')
+
+    $('.cell').click((e) => {
+      r = e.target.innerHTML[0]
+      c = e.target.innerHTML[1]
+      cells.forEach(c => c.style.backgroundColor='white')
+      cells[(parseInt(r)*8+parseInt(c))-9].style.backgroundColor = 'red'
+      $('#rcl').text(`row : ${r} column : ${c}`)
+    })
+
+    $("#addLevel").click(() => {
+      levels.push({
+        clue: $("#clue").val().trim(),
+        direction: $("#answerDirection").val().trim(),
+        answer: $("#answer").val().trim(),
+        row: r,
+        column: c,
+        i: i
+      });
+      i = i + 1
+      $("#clue").val("");
+      $("#answer").val("");
+      $("#levelsAdded").text("Words added : " + levels.length.toString());
+    });
+
+    $("#submitBtn").click(() => {
+
+      let data = {
+        across: {},
+        down: {}
+      }
+      levels.forEach(l => {
+        data[l.direction][l.i] = {
+          clue: l.clue,
+          answer: l.answer.toUpperCase(),
+          row: parseInt(l.row),
+          col: parseInt(l.column),
+        }
+      })
+
+      console.log(data);
+      fetch("/game/crossword", {
+        method: "post",
+        body: JSON.stringify({
+          data: data,
+          gameName: $("#gameName").val().trim(),
+          bgImg: $("#bgImg").val().trim(),
+          titleImg: $("#titleImg").val().trim(),
+          rewardType: $("#rewardType").val().trim(),
+          emojiList: $("#emojiList").val().trim(),
+          txtFont: $("#txtFont").val().trim(),
+          txtColor: $("#txtColor").val().trim(),
+          hintImg: $("#hintImg").val().trim(),
+        }),
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (j) {
+          console.log(j);
+          if (j.status === "success") window.location.href = "/manage_sessions";
+          else alert("Operation uncessfull");
+        })
+        .catch(function (err) {
+          alert("Operation uncessfull");
+        });
+    });
+  </script>
+</div>
+{% endblock %}

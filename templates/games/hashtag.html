@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block body %}
 
 <div class="jumbotron">
-  <h2>Image Quiz</h2>
+  <h2>Hashtag</h2>
 
   <h5>
 
@@ -21,30 +21,11 @@
         <input type="text" id="titleImg" class="form-control" id="exampleInputPassword1" />
         <small id="emailHelp" class="form-text text-muted">image File name with extension with no spaces</small>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Game Image</label>
-        <input type="text" id="img" class="form-control" id="exampleInputPassword1" />
-        <small id="emailHelp" class="form-text text-muted">image File name with extension with no spaces</small>
-      </div>
+
       <div class="form-group">
         <label for="exampleInputPassword1">Hint Image</label>
         <input type="text" id="hintImg" class="form-control" id="exampleInputPassword1" />
         <small id="emailHelp" class="form-text text-muted">image File name with extension with no spaces</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Game Image Border</label>
-        <input type="text" name="borderImg" class="form-control" id="borderImg" />
-        <small id="emailHelp" class="form-text text-muted">image File name with no space</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Game Image back</label>
-        <input type="text" name="borderImg" class="form-control" id="backImg" />
-        <small id="emailHelp" class="form-text text-muted">image File name with no space</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Options Image</label>
-        <input type="text" name="borderImg" class="form-control" id="optionsBackImg" />
-        <small id="emailHelp" class="form-text text-muted">image File name with no space</small>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Text font </label>
@@ -56,26 +37,34 @@
         <label for="exampleInputEmail1">Text color </label>
         <input autofocus type="color" class="form-control" id="txtColor" aria-describedby="emailHelp" value="#ffffff" />
       </div>
-      <br />
-      <h3>Add levels</h3>
-      <h6 id="levelsAdded">levels added : 0</h6>
       <div class="form-group">
-        <label for="exampleInputPassword1">Question </label>
-        <input type="text" name="img" class="form-control" id="question" />
-        <small id="emailHelp" class="form-text text-muted">Question to be displayed</small>
+        <label for="exampleInputEmail1">Select color </label>
+        <input autofocus type="color" class="form-control" id="selectColor" aria-describedby="emailHelp" value="#ffffff" />
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Options</label>
-        <input type="text" name="img" class="form-control" id="options" />
-        <small id="emailHelp" class="form-text text-muted">comma ' , ' seperated values
-        </small>
+
+      <div class="row">
+        <div class="col-6">
+
+          {%for i in range(10)%}
+          {%for j in range(10)%}
+          <input type="text" maxlength="1" id="rc{{i*10+j}}" style="width: 2rem;" value="a" />
+          {%endfor%}
+          <br>
+          {%endfor%}
+
+        </div>
+        <div class="col-6">
+          {%for i in range(10)%}
+          {%for j in range(10)%}
+          <div class="cell"
+            style="width: 2rem;height: 1.9rem; background-color: white; display: inline-block; border: 2px solid black; padding-left: 4px;">
+            {{' '}}{{i}}{{j}} </div>
+          {%endfor%}
+          <br>
+          {%endfor%}
+        </div>
       </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Correct answer option</label>
-        <input type="text" class="form-control" id="correctOption" />
-        <small id="emailHelp" class="form-text text-muted">one of a , b , c</small>
-      </div>
-      <a id="addLevel" class="btn btn-success btn-block">Add level</a>
+
       <br /><br />
       <div class="form-group">
         <label for="exampleFormControlSelect1">Reward Type</label>
@@ -93,73 +82,66 @@
       </div>
       <a id="submitBtn" class="btn btn-primary btn-block">Submit</a>
   </form>
-
+  <style>
+    .cell:hover {
+      background-color: coral !important;
+      size: 110% !important;
+    }
+  </style>
   <script>
-    let levels = [];
+    let blocks = [];
+    let cells = document.querySelectorAll('.cell')
 
-    $("#addLevel").click(() => {
-      const options = $("#options").val().trim().split(",");
-      if (options.length !== 3) {
-        alert("please set only three options");
-        return;
-      }
-      const question = $("#question").val().trim();
-      if (question === "") {
-        alert("question feild cannot be empty");
-        return;
-      }
-      const correnctOption = $("#correctOption").val().trim().toLowerCase();
-      if (
-        !(
-          correnctOption === "a" ||
-          correnctOption === "b" ||
-          correnctOption == "c"
-        )
-      ) {
-        alert("correct option must be one of a,b,c");
-        return;
-      }
-      const ans = {
-        a: options[0],
-        b: options[1],
-        c: options[2],
-      };
-      levels.push({
-        id: levels.length,
-        question: question,
-        answers: ans,
+    $('.cell').click((e) => {
 
-        correctOption: correnctOption,
-        correctAnswer: ans[correnctOption],
-        wasAnswerd: false,
-      });
-      $("#options").val("");
-      $("#question").val("");
-      $("#correctOption").val("");
-      $("#levelsAdded").text("levels addes : " + levels.length.toString());
-    });
+      let text = e.target.textContent.trim()
+      let r = parseInt(text[0])
+      let c = parseInt(text[1])
+      let i = blocks.find(v => v.r === r && v.c === c)
+      if (i === undefined) {
+        cells[(parseInt(r) * 10 + parseInt(c))].style.backgroundColor = 'red'
+        blocks.push({ r, c })
+      }
+      else {
+        cells[(parseInt(r) * 10 + parseInt(c))].style.backgroundColor = 'white'
+        blocks = blocks.filter(v => !(v.r === r && v.c === c))
+      }
+    })
+
+
 
     $("#submitBtn").click(() => {
-      if (levels.length !== 6) {
-        alert("must put 6 levels");
-        return;
+
+      let data = {}
+
+      for (let i = 0; i < 10; i++) {
+        let temp = []
+        let c 
+        for (let j = 0; j < 10; j++) {
+          c = $(`#rc${i*10 + j}`).val().trim()
+          if(c === ''){
+            alert('box '+i+j+' is empty')
+            return
+          }
+          temp.push({ char: c, correct: !!blocks.find(v => v.r === i && v.c === j) })
+        }
+        data[i] = temp
       }
-      fetch("/game/image_quiz", {
+
+      console.log(data);
+      fetch("/game/hashtag", {
         method: "post",
         body: JSON.stringify({
-          levels: levels,
+          data: data,
           gameName: $("#gameName").val().trim(),
-          img: $("#img").val().trim(),
           bgImg: $("#bgImg").val().trim(),
           titleImg: $("#titleImg").val().trim(),
-          borderImg: $("#borderImg").val().trim(),
           rewardType: $("#rewardType").val().trim(),
           emojiList: $("#emojiList").val().trim(),
           txtFont: $("#txtFont").val().trim(),
           txtColor: $("#txtColor").val().trim(),
-          backImg: $("#backImg").val().trim(),
+          selectColor: $("#selectColor").val().trim(),
           hintImg: $("#hintImg").val().trim(),
-          optionsBackImg: $("#optionsBackImg").val().trim(),
         }),
       })
         .then(function (response) {

@@ -1,10 +1,8 @@
 {% extends "base.html" %} {% block body %}
 
 <div class="jumbotron">
-  <h2>Memory Match</h2>
-  <h5>
-   
-  </h5>
+  <h2>Image Trivia</h2>
+  <h5></h5>
   <form action="/game/image_puzzle" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label for="exampleInputEmail1">Game Name</label>
@@ -13,7 +11,7 @@
         type="text"
         name="gameName"
         class="form-control"
-        id="exampleInputEmail1"
+        id="gameName"
         aria-describedby="emailHelp"
       />
       <small id="emailHelp" class="form-text text-muted"
@@ -22,52 +20,153 @@
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Background Image</label>
-      <input
-        type="text"
-        name="bgImg"
-        class="form-control"
-        id="exampleInputPassword1"
-      />
+      <input type="text" name="bgImg" class="form-control" id="bgImg" />
       <small id="emailHelp" class="form-text text-muted"
         >image File name with extension with no spaces</small
       >
+    </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Title Image</label>
-      <input
-        type="text"
-        name="titleImg"
-        class="form-control"
-        id="exampleInputPassword1"
-      />
+      <input type="text" name="titleImg" class="form-control" id="titleImg" />
       <small id="emailHelp" class="form-text text-muted"
         >image File name with extension with no spaces</small
       >
+    </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Game Image</label>
-      <input
-        type="text"
-        name="img"
-        class="form-control"
-        id="exampleInputPassword1"
-      />
+      <label for="exampleInputPassword1">Hint Image</label>
+      <input type="text" id="hintImg" class="form-control" id="titleImg" />
       <small id="emailHelp" class="form-text text-muted"
-        >image File name with extension</small
+        >image File name with extension with no spaces</small
       >
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Number of sections</label>
+      <label for="exampleInputEmail1">Text font </label>
       <input
-        type="number"
-        name="sectionCount"
+        autofocus
+        type="text"
         class="form-control"
-        id="exampleInputPassword1"
-        min="2"
-        max="6"
+        id="txtFont"
+        aria-describedby="emailHelp"
       />
-      <small id="emailHelp" class="form-text text-muted">ideally 3-5</small>
+      <small id="emailHelp" class="form-text text-muted"
+        >case sensitive eg : 'Roboto' choose font from
+        <a href="https://fonts.google.com/" target="blank">here</a></small
+      >
     </div>
-
-    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Text color </label>
+      <input
+        autofocus
+        type="color"
+        class="form-control"
+        id="txtColor"
+        aria-describedby="emailHelp"
+        value="#ffffff"
+      />
+    </div>
+    <br />
+    <h3>Add levels</h3>
+    <h6 id="levelsAdded">levels added : 0</h6>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Question </label>
+      <input type="text" name="img" class="form-control" id="question" />
+      <small id="emailHelp" class="form-text text-muted"
+        >Question to be displayed</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Option filename</label>
+      <input type="text" name="img" class="form-control" id="options" />
+      <small id="emailHelp" class="form-text text-muted"
+        >comma ' , ' seperated values
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Correct answer option number</label>
+      <input type="text" class="form-control" id="correctOption" />
+      <small id="emailHelp" class="form-text text-muted">1,2,3 etc</small>
+    </div>
+    <a id="addLevel" class="btn btn-success btn-block">Add level</a>
+    <br /><br />
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Reward Type</label>
+      <select class="form-control" name="rewardType" id="rewardType">
+        <option value="confetti">Confetti</option>
+        <option value="emoji">Emoji</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Emoji List</label>
+      <input type="text" name="emojiList" class="form-control" id="emojiList" />
+      <small id="emailHelp" class="form-text text-muted"
+        >Comma seperated list of emojis (use only when above option is
+        'emoji')</small
+      >
+    </div>
+    <a id="submitBtn" class="btn btn-primary btn-block">Submit</a>
   </form>
 </div>
+<script>
+  let levels = [];
+
+  $("#addLevel").click(() => {
+    const options = $("#options").val().trim().split(",");
+    if (options.length !== 6) {
+      alert("please set only six options");
+      return;
+    }
+    const question = $("#question").val().trim();
+    if (question === "") {
+      alert("question feild cannot be empty");
+      return;
+    }
+    const correnctOption = parseInt(
+      $("#correctOption").val().trim().toLowerCase()
+    );
+    if (!(correnctOption < 6 && correnctOption > 0)) {
+      alert("correct option must be in range 1 - 6");
+      return;
+    }
+
+    levels.push({
+      id: levels.length,
+      question: question,
+      images: options,
+      correctOption: correnctOption,
+    });
+    $("#levelsAdded").text("levels addes : " + levels.length.toString());
+  });
+
+  $("#submitBtn").click(() => {
+    if (levels.length < 1) {
+      alert("must put atleast 2 levels");
+      return;
+    }
+    fetch("/game/image_trivia", {
+      method: "post",
+      body: JSON.stringify({
+        levels: levels,
+        gameName: $("#gameName").val().trim(),
+        bgImg: $("#bgImg").val().trim(),
+        hintImg: $("#hintImg").val().trim(),
+        titleImg: $("#titleImg").val().trim(),
+        rewardType: $("#rewardType").val().trim(),
+        emojiList: $("#emojiList").val().trim(),
+        txtFont: $("#txtFont").val().trim(),
+        txtColor: $("#txtColor").val().trim(),
+      }),
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (j) {
+        console.log(j);
+        if (j.status === "success") window.location.href = "/manage_sessions";
+        else alert("Operation uncessfull");
+      })
+      .catch(function (err) {
+        alert("Operation uncessfull");
+      });
+  });
+</script>
 {% endblock %}

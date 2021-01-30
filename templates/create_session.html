@@ -84,46 +84,19 @@
         >image File name with extension</small
       >
     </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Greeting media</label>
-      <select class="form-control" id="greetingMediaType">
-        <option value="yt">youtube video</option>
-        <option value="img">image</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Login background Image</label>
-      <input type="text" class="form-control" id="greetingBackground" />
-      <small id="emailHelp" class="form-text text-muted"
-        >image File name with extension</small
-      >
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Greeting Creative Image</label>
-      <input type="text" class="form-control" id="greetingCreative" />
-      <small id="emailHelp" class="form-text text-muted"
-        >image File name with extension</small
-      >
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Greeting media URl</label>
-      <input type="text" class="form-control" id="greetingMediaUrl" />
-      <small id="emailHelp" class="form-text text-muted"
-        >image File name with extension or youtube url</small
-      >
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Greeting secondary image</label>
-      <input type="text" class="form-control" id="greetingSecondaryImg" />
-      <small id="emailHelp" class="form-text text-muted"
-        >image File name without spaces</small
-      >
-    </div>
+
     <div class="form-group">
       <label for="exampleInputPassword1">Loading Spinner</label>
       <input type="text" class="form-control" id="loadingSpinner" />
       <small id="emailHelp" class="form-text text-muted"
         >GIF File name without spaces</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">gameSound</label>
+      <input type="text" class="form-control" id="gameSound" />
+      <small id="emailHelp" class="form-text text-muted"
+        >MP3 File name without spaces</small
       >
     </div>
 
@@ -165,20 +138,6 @@
         >image File name with extension</small
       >
     </div>
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">End Greeting media</label>
-      <select class="form-control" id="endMediaType">
-        <option value="yt">youtube video</option>
-        <option value="img">image</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">End Greeting media URl</label>
-      <input type="text" class="form-control" id="endMediaUrl" />
-      <small id="emailHelp" class="form-text text-muted"
-        >image File name with extension or youtube url</small
-      >
-    </div>
 
     <div class="form-group">
       <label for="exampleInputPassword1">End Creative Image</label>
@@ -193,6 +152,10 @@
       <small id="emailHelp" class="form-text text-muted"
         >image File name with extension</small
       >
+    </div>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="showRsvp" />
+      <label class="form-check-label" for="exampleCheck1">show RSVP</label>
     </div>
 
     <a class="btn btn-primary btn-block" id="submitBtn">Submit</a>
@@ -245,13 +208,6 @@
       const loginBackground = $("#loginBackground").val().trim();
       const loginCreative = $("#loginCreative").val().trim();
       const logoImg = $("#logoImg").val().trim();
-      const greetingMediaType = $("#greetingMediaType").val().trim();
-      const greetingMediaUrl = $("#greetingMediaUrl").val().trim();
-      const greetingBackground = $("#greetingBackground").val().trim();
-      const greetingSecondaryImg = $("#greetingSecondaryImg").val().trim();
-      const greetingCreative = $("#greetingCreative").val().trim();
-      const endMediaType = $("#endMediaType").val().trim();
-      const endMediaUrl = $("#endMediaUrl").val().trim();
       const endBackground = $("#endBackground").val().trim();
       const endCreative = $("#endCreative").val().trim();
       const endDownloadCreative = $("#endDownloadCreative").val().trim();
@@ -259,14 +215,11 @@
       const btnColor = $("#btnColor").val().trim();
       const btnHilight = $("#btnHilight").val().trim();
       const loadingSpinner = $("#loadingSpinner").val().trim();
+      const gameSound = $("#gameSound").val().trim();
+      const showRsvp = $("#showRsvp:checked").val() == "on" ? true : false;
 
       if (gamesAdded.length < 1) {
         alert("No games added");
-        return;
-      }
-      console.log(greetingMediaType);
-      if (sessionName.indexOf(" ") >= 0 || sessionName === "") {
-        alert(`session name can't have spaces`);
         return;
       }
       if (loginBackground.indexOf(" ") >= 0 || loginBackground === "") {
@@ -277,39 +230,13 @@
         alert(`login Creative can't have spaces`);
         return;
       }
-      if (
-        greetingSecondaryImg.indexOf(" ") >= 0 ||
-        greetingSecondaryImg === ""
-      ) {
-        alert(`Greeting Secondary can't have spaces`);
-        return;
-      }
       if (logoImg.indexOf(" ") >= 0 || logoImg === "") {
         alert(`Logo img can't have spaces`);
         return;
       }
-      if (!(greetingMediaType === "yt" || greetingMediaType === "img")) {
-        alert(`unknown value for greeting media type`);
-        return;
-      }
-      if (greetingMediaUrl.indexOf(" ") >= 0 || greetingMediaUrl === "") {
-        alert(`Greeting Media can't have spaces`);
-        return;
-      }
-      if (greetingBackground.indexOf(" ") >= 0 || greetingBackground === "") {
-        alert(`Greeting Background can't have spaces`);
-        return;
-      }
+
       if (loadingSpinner.indexOf(" ") >= 0 || loadingSpinner === "") {
         alert(`Loading Spinner can't have spaces`);
-        return;
-      }
-      if (!(endMediaType === "yt" || endMediaType === "img")) {
-        alert(`unknown value for end media type`);
-        return;
-      }
-      if (endMediaUrl.indexOf(" ") >= 0 || endMediaUrl === "") {
-        alert(`end Media can't have spaces`);
         return;
       }
       if (endBackground.indexOf(" ") >= 0 || endBackground === "") {
@@ -322,20 +249,16 @@
         loginBackground,
         loginCreative,
         logoImg,
-        greetingMediaUrl,
-        greetingMediaType,
-        greetingBackground,
-        greetingSecondaryImg,
-        endMediaUrl,
-        endMediaType,
         endBackground,
+        loadingSpinner,
         endCreative,
         gamesAdded,
         endDownloadCreative,
-        greetingCreative,
         btnHilight,
         btnColor,
         btnFont,
+        gameSound,
+        showRsvp,
       };
 
       console.log(sessionDetails);
